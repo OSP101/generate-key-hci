@@ -6,7 +6,6 @@ import CheckIcon from "./CheckIcon"
 import { signOut } from 'next-auth/react';
 import { useSession, signIn } from "next-auth/react"
 
-
 interface TimeLeft {
     days: number;
     hours: number;
