@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Snippet } from "@nextui-org/react";
 import { Tabs, Tab, Card, CardBody, CardHeader, CardFooter, Divider, Link, Image, Button } from "@nextui-org/react";
 import { Chip } from "@nextui-org/react";
-import { CheckIcon } from "./CheckIcon"
+import CheckIcon from "./CheckIcon"
 import { signOut } from 'next-auth/react';
 import { useSession, signIn } from "next-auth/react"
 
