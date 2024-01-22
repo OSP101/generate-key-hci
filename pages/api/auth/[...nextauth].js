@@ -20,7 +20,7 @@ export const authOptions = {
         return Promise.resolve({ ...user, session: { ...user.session } });
       } else {
         console.error('User not found in local data');
-        return Promise.reject(new Error('User not found'));
+        return Promise.resolve("/403");
       }
     },
   },

@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
+    "@vercel/analytics": "^1.1.2",
+    "@vercel/speed-insights": "^1.0.5",
     "framer-motion": "^10.18.0",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
+    "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18"
   },

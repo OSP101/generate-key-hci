@@ -6,13 +6,14 @@ import { useRouter } from 'next/router'
 export default function Home() {
   const { data: session } = useSession()
 const router = useRouter()
-  useEffect(() =>{
-    if(session){
-      router.push("/ftp")
-    }else{
-      router.push("/login")
-    }
-  },[])
+useEffect(() => {
+  if (session) {
+      router.push("/ftp");
+  } else {
+      // Redirect to the login page only if there's no session
+      router.push("/login");
+  }
+}, [session, router]);
   return (
     <></>
   )

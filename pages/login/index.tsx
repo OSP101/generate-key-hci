@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { useSession, signIn, signOut } from "next-auth/react"
-import React, { useState } from 'react'
-import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
+import React, { useState,Suspense } from 'react'
+import { Tabs, Tab, Card, CardBody ,Spinner} from "@nextui-org/react";
 import Head from 'next/head';
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 
 export default function index() {
@@ -34,8 +36,25 @@ export default function index() {
         }
     }
 
-    console.log("handleInputChange => ", inputValid);
-    console.log(session?.user?.email)
+    const router = useRouter()
+    useEffect(() => {
+        if (session) {
+            router.push("/ftp");
+        } else {
+            // Redirect to the login page only if there's no session
+            router.push("/login");
+        }
+    }, [session, router]);
+    
+
+    if (session && session.user && session.user.email) {
+        return (
+            <Spinner label="Loading..." color="success" />
+        );
+    }    
+    
+
+else if(!session){
     return (
         <>
             <Head>
@@ -158,4 +177,8 @@ export default function index() {
         </>
 
     )
+}
+
+
+    
 }
