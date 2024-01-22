@@ -40,21 +40,9 @@ export default function index() {
     useEffect(() => {
         if (session) {
             router.push("/ftp");
-        } else {
-            // Redirect to the login page only if there's no session
-            router.push("/login");
-        }
+        } 
     }, [session, router]);
     
-
-    if (session && session.user && session.user.email) {
-        return (
-            <Spinner label="Loading..." color="success" />
-        );
-    }    
-    
-
-else if(!session){
     return (
         <>
             <Head>
@@ -177,8 +165,4 @@ else if(!session){
         </>
 
     )
-}
-
-
-    
 }

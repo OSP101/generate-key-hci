@@ -12,10 +12,11 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       <NextUIProvider>
       <NextThemesProvider attribute="class" defaultTheme="light">
       <Component {...pageProps}/>
-      <Analytics />
-      <SpeedInsights />
+
       </NextThemesProvider>
       </NextUIProvider>
+      <Analytics />
+      <SpeedInsights />
     </SessionProvider>
   )
 }

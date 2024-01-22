@@ -111,11 +111,10 @@ export default function index() {
 
     useEffect(() => {
         if (!session) {
-            router.push("/login");
+            router.push("/");
             
         }
     }, [session, router]);
-
 
     return (
         <>
