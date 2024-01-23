@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 
+
 export default function index() {
     const { data: session } = useSession()
     const [emailInvalid, setEmailInvalid] = useState(false);
@@ -42,6 +43,7 @@ export default function index() {
             router.push("/ftp");
         } 
     }, [session, router]);
+
     
     return (
         <>
@@ -50,7 +52,7 @@ export default function index() {
             </Head>
             <div className=" text-[#333]">
                 <div className="min-h-screen flex flex-col items-center justify-center">
-                    <div className="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
+                    <div className={`grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md `}>
                         <div className="md:max-w-md w-full sm:px-6 py-4">
                             <form action="">
                                 <div className={`${emailInvalid ? `mb-0` : `mb-12`}`}>
@@ -156,7 +158,7 @@ export default function index() {
                             </form>
 
                         </div>
-                        <div className="md:h-full max-md:mt-10 bg-[#000842] rounded-xl lg:p-12 p-8">
+                        <div className="md:h-full max-md:mt-10 bg-[#000842] rounded-xl lg:p-12 p-8 max-sm:hidden">
                             <img src="https://readymadeui.com/signin-image.webp" className="w-full h-full object-contain" alt="login-image" />
                         </div>
                     </div>

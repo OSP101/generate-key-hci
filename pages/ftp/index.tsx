@@ -44,7 +44,7 @@ export default function index() {
 
     const calculateTimeLeftSinger = (): TimeLeft => {
         const thaiTimeZone = 'Asia/Bangkok';
-        const targetDate = new Date('2024-03-13T00:00:00'); // Set your countdown date here
+        const targetDate = new Date('2024-03-06T13:00:00'); // Set your countdown date here
         const currentDate = new Date();
         const formatter = new Intl.DateTimeFormat('en-US', { timeZone: thaiTimeZone });
 
@@ -72,7 +72,7 @@ export default function index() {
 
     const calculateTimeLeft = (): TimeLeft => {
         const thaiTimeZone = 'Asia/Bangkok';
-        const targetDate = new Date('2024-03-23T00:00:00'); // Set your countdown date here
+        const targetDate = new Date('2024-03-20T13:00:00'); // Set your countdown date here
         const currentDate = new Date();
         const formatter = new Intl.DateTimeFormat('en-US', { timeZone: thaiTimeZone });
 
@@ -109,12 +109,6 @@ export default function index() {
     }, []);
     const router = useRouter()
 
-    useEffect(() => {
-        if (!session) {
-            router.push("/");
-            
-        }
-    }, [session, router]);
 
     return (
         <>
@@ -189,14 +183,14 @@ export default function index() {
 
                     <h3 className="text-xl text-center font-extrabold">HCI Mini project</h3>
 
-                    <div className=" max-w-6xl w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
+                    <div className=" max-w-6xl w-full p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md sm:m-0 md:m-0">
                         <div className=" w-full sm:px-6 py-4">
                             <div className="flex w-full flex-col">
                                 {users.map((user, userIndex) => (
                                     user.email === session?.user?.email ? (
                                         <Tabs key={userIndex} aria-label="Options" color='success' className=' text-white'>
                                             <Tab key="photos" title="งานเดี่ยว" className=' text-white'>
-                                                <div className="grid md:grid-cols-2 items-center gap-4 w-full m-4">
+                                                <div className="grid md:grid-cols-2 items-center gap-4 w-full  ms:m-0">
                                                     <div className="md:max-w-md w-full">
                                                         <Card className="max-w-[400px]">
                                                             <CardHeader className="flex gap-3">
@@ -218,7 +212,7 @@ export default function index() {
                                                                 <p className='text-md'>Username และ Password สำหรับเข้าสู่ระบบ</p>
                                                                 <br />
                                                                 <p className='text-small text-default-500'>Username:</p>
-                                                                <Snippet size="sm" color="success" hideSymbol>{user.username}</Snippet>
+                                                                <Snippet size="sm" color="success" hideSymbol>{user.stdid}</Snippet>
                                                                 <p className='text-small text-default-500 pt-1'>Password:</p>
                                                                 <Snippet size="sm" color="success" hideSymbol>{user.key}</Snippet>
                                                             </CardBody>
@@ -230,31 +224,32 @@ export default function index() {
                                                         </Card>
                                                     </div>
                                                     <div>
-                                                        <h3 className="text-xl text-center font-extrabold pb-1">กำหนดส่งวันจันทร์ ที่ 20 มีนาคม 2567 เวลา 13:00</h3>
-                                                        <h3 className="text-xl text-center font-extrabold pb-6 ">เหลือเวลาอีก</h3>
+                                                        
+                                                        <h3 className={`text-xl text-center font-extrabold pb-1 ${theme == "light" ? "text-black" : ""}`}>กำหนดส่งวันจันทร์ ที่ 20 มีนาคม 2567 เวลา 13:00</h3>
+                                                        <h3 className={`text-xl text-center font-extrabold pb-6 ${theme == "light" ? "text-black" : ""}`}>เหลือเวลาอีก</h3>
 
                                                         <div className="grid grid-flow-col justify-center gap-5 text-center auto-cols-max">
-                                                            <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
-                                                                <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeftSinger.days } as React.CSSProperties}></span>
+                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
+                                                                <span className={`countdown font-mono text-5xl ${theme == "light" ? "text-black" : ""}`}>
+                                                                    <span style={{ "--value": timeLeft.days } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
                                                                 </span>
                                                                 days
                                                             </div>
-                                                            <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
+                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
                                                                 <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeftSinger.hours } as React.CSSProperties}></span>
+                                                                    <span style={{ "--value": timeLeft.hours } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
                                                                 </span>
                                                                 hours
                                                             </div>
-                                                            <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
+                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
                                                                 <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeftSinger.minutes } as React.CSSProperties}></span>
+                                                                    <span style={{ "--value": timeLeft.minutes } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
                                                                 </span>
                                                                 min
                                                             </div>
-                                                            <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
+                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
                                                                 <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeftSinger.seconds } as React.CSSProperties}></span>
+                                                                    <span style={{ "--value": timeLeft.seconds } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
                                                                 </span>
                                                                 sec
                                                             </div>
@@ -265,7 +260,17 @@ export default function index() {
                                                                 as={Link}
                                                                 color="success"
                                                                 showAnchorIcon
-                                                                variant="solid"
+                                                                variant="flat"
+                                                            >
+                                                                คู่มือสำหรับส่งเอกสารงานเดี่ยว
+                                                            </Button>
+                                                            <Button
+                                                                href="https://github.com/nextui-org/nextui"
+                                                                as={Link}
+                                                                color="success"
+                                                                showAnchorIcon
+                                                                variant="flat"
+                                                                className='mt-3'
                                                             >
                                                                 ลิงก์เว็บไซต์สำหรับส่งเอกสารงานเดี่ยว
                                                             </Button>
@@ -274,7 +279,7 @@ export default function index() {
                                                 </div>
                                             </Tab>
                                             <Tab key="music" title="งานกลุ่ม">
-                                                <div className="grid md:grid-cols-2 items-center justify-start gap-4 w-full m-4">
+                                                <div className="grid md:grid-cols-2 items-center justify-start gap-4 w-full">
                                                     <div className="md:max-w-md w-full">
 
                                                         <Card className="max-w-[400px]">
@@ -337,42 +342,52 @@ export default function index() {
                                                     </div>
                                                     <div>
 
-                                                        <h3 className="text-xl text-center font-extrabold pb-1 ">กำหนดส่งวันจันทร์ ที่ 6 มีนาคม 2567 เวลา 13:00</h3>
-                                                        <h3 className="text-xl text-center font-extrabold pb-6 ">เหลือเวลาอีก</h3>
+                                                    <h3 className={`text-xl text-center font-extrabold pb-1 ${theme == "light" ? "text-black" : ""}`}>กำหนดส่งวันจันทร์ ที่ 06 มีนาคม 2567 เวลา 13:00</h3>
+                                                        <h3 className={`text-xl text-center font-extrabold pb-6 ${theme == "light" ? "text-black" : ""}`}>เหลือเวลาอีก</h3>
 
                                                         <div className="grid grid-flow-col justify-center gap-5 text-center auto-cols-max">
-                                                            <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
-                                                                <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeft.days } as React.CSSProperties}></span>
+                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
+                                                                <span className={`countdown font-mono text-5xl ${theme == "light" ? "text-black" : ""}`}>
+                                                                    <span style={{ "--value": timeLeftSinger.days } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
                                                                 </span>
                                                                 days
                                                             </div>
-                                                            <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
+                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
                                                                 <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeft.hours } as React.CSSProperties}></span>
+                                                                    <span style={{ "--value": timeLeftSinger.hours } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
                                                                 </span>
                                                                 hours
                                                             </div>
-                                                            <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
+                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
                                                                 <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeft.minutes } as React.CSSProperties}></span>
+                                                                    <span style={{ "--value": timeLeftSinger.minutes } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
                                                                 </span>
                                                                 min
                                                             </div>
-                                                            <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
+                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
                                                                 <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeft.seconds } as React.CSSProperties}></span>
+                                                                    <span style={{ "--value": timeLeftSinger.seconds } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
                                                                 </span>
                                                                 sec
                                                             </div>
                                                         </div>
                                                         <div className="flex flex-col justify-content pt-5">
-                                                            <Button
-                                                                href="#"
+                                                        <Button
+                                                                href="https://github.com/nextui-org/nextui"
                                                                 as={Link}
                                                                 color="success"
                                                                 showAnchorIcon
-                                                                variant="solid"
+                                                                variant="flat"
+                                                            >
+                                                                คู่มือสำหรับส่งเอกสารงานกลุ่ม
+                                                            </Button>
+                                                            <Button
+                                                                href="https://github.com/nextui-org/nextui"
+                                                                as={Link}
+                                                                color="success"
+                                                                showAnchorIcon
+                                                                variant="flat"
+                                                                className='mt-3'
                                                             >
                                                                 ลิงก์เว็บไซต์สำหรับส่งเอกสารงานกลุ่ม
                                                             </Button>
