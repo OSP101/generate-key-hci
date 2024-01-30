@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Snippet } from "@nextui-org/react";
-import { Tabs, Tab, Card, CardBody, CardHeader, CardFooter, Divider, Link, Image, Button, Switch } from "@nextui-org/react";
+import { Tooltip, Tabs, Tab, Card, CardBody, CardHeader, CardFooter, Divider, Link, Image, Button, Switch } from "@nextui-org/react";
 import { Chip } from "@nextui-org/react";
 import CheckIcon from "./CheckIcon"
 import { signOut } from 'next-auth/react';
@@ -8,7 +8,7 @@ import { useSession, signIn } from "next-auth/react"
 import Head from 'next/head';
 import { useRouter } from 'next/router'
 import { useTheme } from 'next-themes'
-
+import { IoIosInformationCircle } from "react-icons/io";
 
 import { users, groups } from '../../data/data';
 
@@ -204,7 +204,7 @@ export default function index() {
                                                                 <div className="flex flex-col">
                                                                     <p className="text-md">{session?.user?.name}</p>
                                                                     <p className="text-small text-default-500">{session?.user?.email}</p>
-                                                                    <p className="text-small text-default-500">{user.stdid}</p>
+                                                                    <p className="text-small text-default-500">{user.stdid} Section: {user.sec}</p>
                                                                 </div>
                                                             </CardHeader>
                                                             <Divider />
@@ -224,7 +224,7 @@ export default function index() {
                                                         </Card>
                                                     </div>
                                                     <div>
-                                                        
+
                                                         <h3 className={`text-xl text-center font-extrabold pb-1 ${theme == "light" ? "text-black" : ""}`}>กำหนดส่งวันจันทร์ ที่ 20 มีนาคม 2567 เวลา 13:00</h3>
                                                         <h3 className={`text-xl text-center font-extrabold pb-6 ${theme == "light" ? "text-black" : ""}`}>เหลือเวลาอีก</h3>
 
@@ -261,16 +261,18 @@ export default function index() {
                                                                 color="success"
                                                                 showAnchorIcon
                                                                 variant="flat"
+                                                                target='blank'
                                                             >
                                                                 คู่มือสำหรับส่งเอกสารงานเดี่ยว
                                                             </Button>
                                                             <Button
-                                                                href="https://github.com/nextui-org/nextui"
+                                                                href={`http://202.28.94.18/hci66/login/index.php?username=${user.stdid}&password=${user.key}`}
                                                                 as={Link}
                                                                 color="success"
                                                                 showAnchorIcon
                                                                 variant="flat"
                                                                 className='mt-3'
+                                                                target='blank'
                                                             >
                                                                 ลิงก์เว็บไซต์สำหรับส่งเอกสารงานเดี่ยว
                                                             </Button>
@@ -294,7 +296,7 @@ export default function index() {
                                                                 <div className="flex flex-col">
                                                                     <p className="text-md">{session?.user?.name}</p>
                                                                     <p className="text-small text-default-500">{session?.user?.email}</p>
-                                                                    <p className="text-small text-default-500">{user.stdid}</p>
+                                                                    <p className="text-small text-default-500">{user.stdid} Section: {user.sec}</p>
                                                                 </div>
                                                             </CardHeader>
                                                             <Divider />
@@ -302,18 +304,47 @@ export default function index() {
                                                             {groups.map((group, groupIndex) => (
                                                                 group.id === user.groupid ? (<div key={groupIndex}>
                                                                     <CardBody>
-                                                                        <p className='text-md'>กลุ่มที่: {group.id} {group.name}</p>
+                                                                        <Tooltip key={groupIndex} color='success' placement='right' content={
+                                                                            <div className="px-1 py-1">
+                                                                                <div className="text-small font-bold"><b>กลุ่มที่:</b> {group.id} {group.name}</div>
+                                                                                <div className="text-tiny"><b>หัวข้อ:</b> {group.topic}</div>
+                                                                                <div className="text-tiny"><b>กลุ่มเป้าหมาย:</b> {group.Target}</div>
+                                                                                <div className="text-tiny"><b>การทำงานของแอป:</b> </div>
+                                                                                {group.details.map((detail, detailIndex) => (
+                                                                                    <li key={detailIndex} className="text-tiny">{detail}</li>
+                                                                                ))}
+
+                                                                            </div>}>
+                                                                            <Button variant="flat" className="capitalize">กลุ่มที่: {group.id} {group.name}</Button>
+                                                                        </Tooltip>
                                                                         {users.map((userall, userIndexAll) => (
                                                                             userall.groupid === group.id ? (
-                                                                                <Chip
-                                                                                    key={userIndexAll}
-                                                                                    startContent={<CheckIcon size={18} height={undefined} width={undefined} />}
-                                                                                    variant="bordered"
-                                                                                    color="success"
-                                                                                    className='mt-1'
-                                                                                >
-                                                                                    {userall.name}
-                                                                                </Chip>
+                                                                                <Tooltip key={userIndexAll} color='success' placement='right' content={
+                                                                                    <div className='flex py-1'>
+                                                                                        <Image
+                                                                                            alt="nextui logo"
+                                                                                            height={100}
+                                                                                            radius="sm"
+                                                                                            src={userall.image || undefined}
+                                                                                            width={60}
+                                                                                        />
+                                                                                        <div className="flex flex-col ms-1">
+                                                                                            <p className="text-small font-bold">{userall.name}</p>
+                                                                                            <p className="text-tiny">{userall.email}</p>
+                                                                                            <p className="text-tiny">{userall.stdid} Section: {userall.sec}</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                }>
+                                                                                    <Chip
+                                                                                        key={userIndexAll}
+                                                                                        startContent={<CheckIcon size={18} height={undefined} width={undefined} />}
+                                                                                        variant="bordered"
+                                                                                        color="success"
+                                                                                        className='mt-1'
+                                                                                    >
+                                                                                        {userall.name}
+                                                                                    </Chip>
+                                                                                </Tooltip>
                                                                             ) : null
 
                                                                         ))}
@@ -334,7 +365,7 @@ export default function index() {
 
                                                             <Divider />
                                                             <CardFooter>
-                                                                <p className='text-small text-default-500'>update: 17/01/2024 19:48:19</p>
+                                                                <p className='text-small text-default-500'>update: 27/01/2024 19:48:19</p>
 
                                                             </CardFooter>
                                                         </Card>
@@ -342,7 +373,7 @@ export default function index() {
                                                     </div>
                                                     <div>
 
-                                                    <h3 className={`text-xl text-center font-extrabold pb-1 ${theme == "light" ? "text-black" : ""}`}>กำหนดส่งวันจันทร์ ที่ 06 มีนาคม 2567 เวลา 13:00</h3>
+                                                        <h3 className={`text-xl text-center font-extrabold pb-1 ${theme == "light" ? "text-black" : ""}`}>กำหนดส่งวันจันทร์ ที่ 06 มีนาคม 2567 เวลา 13:00</h3>
                                                         <h3 className={`text-xl text-center font-extrabold pb-6 ${theme == "light" ? "text-black" : ""}`}>เหลือเวลาอีก</h3>
 
                                                         <div className="grid grid-flow-col justify-center gap-5 text-center auto-cols-max">
@@ -372,25 +403,30 @@ export default function index() {
                                                             </div>
                                                         </div>
                                                         <div className="flex flex-col justify-content pt-5">
-                                                        <Button
-                                                                href="https://github.com/nextui-org/nextui"
-                                                                as={Link}
-                                                                color="success"
-                                                                showAnchorIcon
-                                                                variant="flat"
-                                                            >
-                                                                คู่มือสำหรับส่งเอกสารงานกลุ่ม
-                                                            </Button>
                                                             <Button
                                                                 href="https://github.com/nextui-org/nextui"
                                                                 as={Link}
                                                                 color="success"
                                                                 showAnchorIcon
                                                                 variant="flat"
-                                                                className='mt-3'
+                                                                target='blank'
                                                             >
-                                                                ลิงก์เว็บไซต์สำหรับส่งเอกสารงานกลุ่ม
+                                                                คู่มือสำหรับส่งเอกสารงานกลุ่ม
                                                             </Button>
+                                                            {groups.map((group, groupIndex) => (
+                                                                group.id === user.groupid ? (
+                                                                    <Button
+                                                                        href={`http://202.28.94.18/hci66/login/index.php?username=${group.username}&password=${group.key}`}
+                                                                        as={Link}
+                                                                        color="success"
+                                                                        showAnchorIcon
+                                                                        variant="flat"
+                                                                        className='mt-3'
+                                                                        target='blank'
+                                                                    >
+                                                                        ลิงก์เว็บไซต์สำหรับส่งเอกสารงานกลุ่ม
+                                                                    </Button>
+                                                                ) : null))}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -398,15 +434,11 @@ export default function index() {
                                         </Tabs>
                                     ) : null
                                 ))}
-
                             </div>
-
-
-
                         </div>
 
                     </div>
-                    <p className='text-small text-default-500 mb-3'>Copyright 2024 © Generate-Key-Hci</p>
+                    <p className='text-small text-default-500 mb-3 mt-1'>Copyright 2024 © Generate-Key-Hci BY <a href='https://github.com/OSP101' target='_blank'><u>OSP101</u></a></p>
 
                 </div>
             </div>
