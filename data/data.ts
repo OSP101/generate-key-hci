@@ -7,7 +7,7 @@ const users = [
         email: "supphitan.p@kkumail.com",
         stdid: "633020334-8",
         key: "zgdiccuseugu",
-        groupid:1,
+        groupid:0,
         sec:1,
         image:"https://lh3.googleusercontent.com/a/ACg8ocJXFlu73BECmcaLVJQHbcjjdsncvfiaEVAKYyH7QfMQdA9A"
     },
@@ -23,7 +23,7 @@ const users = [
     },
     {
         id: 3,
-        name: "pichamon",
+        name: "Pichamon Boonsre TA",
         email: "pichamon.bo@kkumail.com",
         stdid: "633020313-6",
         key: "zgdiccuseugu",
@@ -1882,6 +1882,17 @@ const groups = [
         ],
         username:"G37",
         key:"iqclncjyjuuy"
+    },
+    {
+        id: 0,
+        name: "TA Test",
+        topic: "ทดสอบระบบงาน",
+        Target: "TA",
+        details: [
+            "ไม่พบข้อมูล"
+        ],
+        username:"0",
+        key:"00000"
     }
 ]
 
