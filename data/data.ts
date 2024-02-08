@@ -5,8 +5,8 @@ const users = [
         id: 1,
         name: "Supphitan Paksawad Co-TA",
         email: "supphitan.p@kkumail.com",
-        stdid: "633020334-8",
-        key: "zgdiccuseugu",
+        stdid: "6330203136",
+        key: "1234",
         groupid:0,
         sec:1,
         image:"https://lh3.googleusercontent.com/a/ACg8ocJXFlu73BECmcaLVJQHbcjjdsncvfiaEVAKYyH7QfMQdA9A"
