@@ -1461,7 +1461,7 @@ const groups = [
             "แอปพลิเคชันหาเพื่อนใหม่ที่กำลังศึกษาในรั้วมหาวิทยาลัยขอนแก่น โดยค้นหาจากกิจกรรมหรือความชอบที่คล้ายคลึงกัน",
             "สามารถติดต่อพูดคุยกันภายในแอป"
         ],
-        username:"G01",
+        username:"g01",
         key:"zgdiccuseugu"
     },
     {
@@ -1472,7 +1472,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G02",
+        username:"g02",
         key:"kytcuxxuunot"
     },
     {
@@ -1483,7 +1483,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G03",
+        username:"g03",
         key:"hisilnevqemf"
     },
     {
@@ -1494,7 +1494,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G04",
+        username:"g04",
         key:"bzexcopzymqe"
     },
     {
@@ -1505,7 +1505,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G05",
+        username:"g05",
         key:"zwjxotdtobnp"
     },
     {
@@ -1516,7 +1516,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G06",
+        username:"g06",
         key:"jvpmdnorgbuf"
     },
     {
@@ -1527,7 +1527,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G07",
+        username:"g07",
         key:"akouvkjnofai"
     },
     {
@@ -1540,7 +1540,7 @@ const groups = [
             "เลือกประเภทของค่ายหรือกิจกรรมที่ต้องการจะเข้าร่วม",
             "แสดงรายการและรายละเอียด"
         ],
-        username:"G08",
+        username:"g08",
         key:"aocxgksyymva"
     },
     {
@@ -1551,7 +1551,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G09",
+        username:"g09",
         key:"azqxhjtluxsz"
     },
     {
@@ -1562,7 +1562,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G10",
+        username:"g10",
         key:"prnzhusbqnde"
     },
     {
@@ -1575,7 +1575,7 @@ const groups = [
             "สามารถหารูมเมทได้ โดยสามารถระบุเพศ,อายุ และสามารถติดต่อกันเพื่อพูดคุยกันได้ หากไม่ต้องการรูมเมทสามารถระบุว่าไม่ต้องการรูมเมทได้",
             "มีแผนที่(GPS) สามารถดูการเดินทางไปยังที่พักได้"
         ],
-        username:"G11",
+        username:"g11",
         key:"ypoozixnepvx"
     },
     {
@@ -1590,7 +1590,7 @@ const groups = [
             "หาเพื่อนหรือรุ่นพี่",
             "หาคนติวเรื่องเรียนได้"
         ],
-        username:"G12",
+        username:"g12",
         key:"bandvtmazvna"
     },
     {
@@ -1601,7 +1601,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G13",
+        username:"g13",
         key:"hobdxargqjkj"
     },
     {
@@ -1612,7 +1612,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G14",
+        username:"g14",
         key:"rfwoarvydnuu"
     },
     {
@@ -1623,7 +1623,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G15",
+        username:"g15",
         key:"pjejxzljczui"
     },
     {
@@ -1634,7 +1634,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G16",
+        username:"g16",
         key:"frovwhkynbxy"
     },
     {
@@ -1645,7 +1645,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G17",
+        username:"g17",
         key:"bhnqlpkagyga"
     },
     {
@@ -1656,7 +1656,7 @@ const groups = [
             details: [
                 "ไม่พบข้อมูล"
             ],
-            username:"G18",
+            username:"g18",
             key:"gyhkzanynxtm"
     },
     {
@@ -1667,7 +1667,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G19",
+        username:"g19",
         key:"oflgebgthrse"
     },
     {
@@ -1678,7 +1678,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G20",
+        username:"g20",
         key:"leupjibkquwo"
     },
     {
@@ -1689,7 +1689,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G21",
+        username:"g21",
         key:"knjcyzcucuzw"
     },
     {
@@ -1703,7 +1703,7 @@ const groups = [
             "เพื่อช่วยในการติดตามตำแหน่งและเหตุการณ์ของบุคคลในกรณีฉุกเฉิน เพื่อให้การช่วยเหลือมีประสิทธิภาพ",
             "เพื่อสนับสนุนการรักษาความปลอดภัยในพื้นที่มหาวิทยาลัย เช่น การเตือนเวลาเข้า-ออก หรือมีข้อมูลที่เป็นประโยชน์สำหรับการดูแลความปลอดภัย"
         ],
-        username:"G22",
+        username:"g22",
         key:"wgujwcoqeril"
     },
     {
@@ -1722,7 +1722,7 @@ const groups = [
             "แบบทดสอบเพื่อแนะนำคณะ",
             "ดูรายละเอียดความเป็นมาของมหาลัย"
         ],
-        username:"G23",
+        username:"g23",
         key:"avwshvcuyail"
     },
     {
@@ -1733,7 +1733,7 @@ const groups = [
         details: [
             "ใช้สำหรับเช็คพื้นที่จอดรถในมหาวิทยาลัยขอนแก่นสามารถรู้ได้ว่าจุดจอดรถบริเวณไหนเต็มแล้วหรือยังว่างอยู่แชะสามารถตรวจสอบผ่านกล้องของแอปที่อยู่ในบริเวณจอดรถ"
         ],
-        username:"G24",
+        username:"g24",
         key:"bteqekemzyng"
     },
     {
@@ -1744,7 +1744,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G25",
+        username:"g25",
         key:"hxyhaabhzbqy"
     },
     {
@@ -1755,7 +1755,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G26",
+        username:"g26",
         key:"ncdpwmdruicu"
     },
     {
@@ -1768,7 +1768,7 @@ const groups = [
             "แอปพลิเคชันจะอัปเดตห้องว่างแบบ real time พร้อมรูปภาพจริงของหอพัก และรูปภาพจริงของห้อง (ไม่ใช่ห้องตัวอย่าง) เพื่อป้องกันปัญหาหอพัก/ห้องพักไม่ตรงปก",
             "แอปพลิเคชันจะทำการแนะนำห้องที่เหมาะสมกับความต้องการของผู้อยู่อาศัย เช่น ผู้อยู่อาศัยต้องการห้องพักเรทราคา 3,500-4,000 ห่างจากคณะไม่เกิน 500 เมตร โซนใกล้ร้านเหล้า เป็นต้น แอปพลิเคชันจะประมวลผลโดยนำปัจจัยต่าง ๆ มาเปรียบเทียบกัน แล้วทำการสรุปผลว่าหอพักไหนตอบโจทย์มากที่สุด"
         ],
-        username:"G27",
+        username:"g27",
         key:"ubrmxhwnwern"
     },
     {
@@ -1781,7 +1781,7 @@ const groups = [
             "สามารถกรอกเป้าหมาย และเกรดแต่ละวิชา",
             "แอปจะวางแผนการเรียนให้ แล้วบอกแนวทางถ้าทำตามเป้าหมายไม่ได้"
         ],
-        username:"G28",
+        username:"g28",
         key:"ljmjblghxneu"
     },
     {
@@ -1792,7 +1792,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G29",
+        username:"g29",
         key:"neorvetzbhuo"
     },
     {
@@ -1803,7 +1803,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G30",
+        username:"g30",
         key:"befrugvafgot"
     },
     {
@@ -1814,7 +1814,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G31",
+        username:"g31",
         key:"ruaqgbnrvqkj"
     },
     {
@@ -1825,7 +1825,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G32",
+        username:"g32",
         key:"kgmfyccmfaio"
     },
     {
@@ -1836,7 +1836,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G33",
+        username:"g33",
         key:"xfsnneueagle"
     },
     {
@@ -1847,7 +1847,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G34",
+        username:"g34",
         key:"nnclsshptkbn"
     },
     {
@@ -1858,7 +1858,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G35",
+        username:"g35",
         key:"kmzzfadblnvr"
     },
     {
@@ -1869,7 +1869,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G36",
+        username:"g36",
         key:"oxwkybeodafp"
     },
     {
@@ -1880,7 +1880,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"G37",
+        username:"g37",
         key:"iqclncjyjuuy"
     },
     {
@@ -1891,7 +1891,7 @@ const groups = [
         details: [
             "ไม่พบข้อมูล"
         ],
-        username:"0",
+        username:"g00",
         key:"00000"
     }
 ]
