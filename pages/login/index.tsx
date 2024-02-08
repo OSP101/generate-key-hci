@@ -61,13 +61,21 @@ export default function index() {
                                     <h3 className="text-3xl font-extrabold">Login to your account</h3>
                                 </div>
 
-                                <button
-                                    onClick={handleGoogleSignin}
+                                {/* <button
+                                onClick={handleGoogleSignin}
                                     className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
                                     <Image src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"
                                         width={18} height={18} />Continue with
                                     Google
-                                </button>
+                                </button> */}
+
+<button type="button"
+                                         onClick={handleGoogleSignin}
+className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60">
+                                    <Image src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"
+                                        width={18} height={18} />Continue with
+                                    Google
+                                    </button>
                             </form>
 
                         </div>
