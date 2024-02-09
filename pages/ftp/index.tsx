@@ -256,7 +256,7 @@ export default function index() {
                                                         </div>
                                                         <div className="flex flex-col justify-content pt-5">
                                                             <Button
-                                                                href="https://youtu.be/mzDy11WES4U"
+                                                                href="https://youtu.be/USwbEhBbuKs"
                                                                 as={Link}
                                                                 color="success"
                                                                 showAnchorIcon
@@ -404,7 +404,7 @@ export default function index() {
                                                         </div>
                                                         <div className="flex flex-col justify-content pt-5">
                                                             <Button
-                                                                href="https://youtu.be/mzDy11WES4U"
+                                                                href="https://youtu.be/USwbEhBbuKs"
                                                                 as={Link}
                                                                 color="success"
                                                                 showAnchorIcon
