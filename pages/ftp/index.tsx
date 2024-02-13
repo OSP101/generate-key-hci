@@ -218,7 +218,7 @@ export default function index() {
                                                             </CardBody>
                                                             <Divider />
                                                             <CardFooter>
-                                                                <p className='text-small text-default-500'>update: 17/01/2024 19:48:19</p>
+                                                                <p className='text-small text-default-500'>update: 13/02/2024 09:48:19</p>
 
                                                             </CardFooter>
                                                         </Card>
@@ -365,7 +365,7 @@ export default function index() {
 
                                                             <Divider />
                                                             <CardFooter>
-                                                                <p className='text-small text-default-500'>update: 27/01/2024 19:48:19</p>
+                                                                <p className='text-small text-default-500'>update: 13/02/2024 18:48:19</p>
 
                                                             </CardFooter>
                                                         </Card>
