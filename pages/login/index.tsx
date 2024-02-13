@@ -79,6 +79,7 @@ className="inline-flex h-10 w-full items-center justify-center gap-2 rounded bor
                             </form>
 
                         </div>
+                        <p className='text-small text-default-500 mb-3 mt-1'>หากพบปัญหาในกาเข้าสู่ระบบ <a href='https://m.me/hcibysumonta' target='_blank'><u>คลิก</u></a></p>
 
                     </Card>
                     <p className='text-small text-default-500 mb-3 mt-1'>Copyright 2024 © Generate-Key-Hci BY <a href='https://github.com/OSP101' target='_blank'><u>OSP101</u></a></p>
