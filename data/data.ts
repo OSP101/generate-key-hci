@@ -14,7 +14,7 @@ const users = [
     {
         id: 2,
         name: "pimnapa",
-        email: "pimnapa.s@kkumail.com",
+        email: "pimnapa@kkumail.com",
         stdid: "643020399-1",
         key: "zgdiccuseugu",
         groupid:0,
