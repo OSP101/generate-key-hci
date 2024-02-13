@@ -266,7 +266,7 @@ export default function index() {
                                                                 คู่มือสำหรับส่งเอกสารงานเดี่ยว
                                                             </Button>
                                                             <Button
-                                                                href={`https://hcibysumonta.com/hci66/login/index.php?username=${user.stdid}&password=${user.key}`}
+                                                                href={`https://hcibysumonta.com/hci66/login/`}
                                                                 as={Link}
                                                                 color="success"
                                                                 showAnchorIcon
@@ -416,7 +416,7 @@ export default function index() {
                                                             {groups.map((group, groupIndex) => (
                                                                 group.id === user.groupid ? (
                                                                     <Button
-                                                                        href={`https://hcibysumonta.com/hci66/login/index.php?username=${group.username}&password=${group.key}`}
+                                                                        href={`https://hcibysumonta.com/hci66/login/`}
                                                                         as={Link}
                                                                         color="success"
                                                                         showAnchorIcon
