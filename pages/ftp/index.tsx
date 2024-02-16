@@ -438,7 +438,7 @@ export default function index() {
                         </div>
 
                     </div>
-                    <p className='text-small text-default-500 mb-3 mt-1'>Copyright 2024 © Generate-Key-Hci BY <a href='https://github.com/OSP101' target='_blank'><u>OSP101</u></a></p>
+                    <p className='text-small text-default-500 mb-3 mt-1'>© 2024 HCI v0.4 All Rights Reserved. made with by <a href="http://github.com/OSP101" target="_blank">OSP101</a> and <a href="http://www.facebook.com/picha143" target="_blank" rel="noopener noreferrer">Aomsin</a></p>
 
                 </div>
             </div>
