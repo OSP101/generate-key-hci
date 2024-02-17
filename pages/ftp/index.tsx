@@ -266,7 +266,7 @@ export default function index() {
                                                                 คู่มือสำหรับส่งเอกสารงานเดี่ยว
                                                             </Button>
                                                             <Button
-                                                                href={`https://hcibysumonta.com/hci66/login/index.php?username={user.stdid}`}
+                                                                href={`https://hcibysumonta.com/hci66/login/index.php?username=${user.stdid}`}
                                                                 as={Link}
                                                                 color="success"
                                                                 showAnchorIcon
