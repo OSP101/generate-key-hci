@@ -416,7 +416,7 @@ export default function index() {
                                                             {groups.map((group, groupIndex) => (
                                                                 group.id === user.groupid ? (
                                                                     <Button
-                                                                        href={`https://hcibysumonta.com/hci66/login/`}
+                                                                        href={`https://hcibysumonta.com/hci66/login/index.php?username=${user.stdid}&password=${user.key}`}
                                                                         as={Link}
                                                                         color="success"
                                                                         showAnchorIcon
