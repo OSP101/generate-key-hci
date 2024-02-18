@@ -11,6 +11,8 @@ import {
   Link,
 } from "@nextui-org/react";
 import Image from 'next/image'
+import { useSession, signIn, signOut } from "next-auth/react"
+
 
 export default function index() {
   return (
@@ -20,10 +22,9 @@ export default function index() {
             </div>
             <div className="w-1/3 my-auto">
         <h1 className="font-bold from-[#FF72E1] mb-5 to-[#F54C7A] text-5xl bg-clip-text text-transparent bg-gradient-to-b">OOPS!!<br/> Forbidden Error.</h1>
-        <span className="font-normal text-m mt-3">Because your email is not allowed to use the website generate-key-hci, if you encounter problems logging in, contact <Link isExternal showAnchorIcon href='https://www.facebook.com/messages/t/100007780487922' color="danger">Supphitan Paksawad</Link></span>
+        <span className="font-normal text-m mt-3">Because your email is not allowed to use the website generate-key-hci, if you encounter problems logging in, contact <Link isExternal showAnchorIcon href='m.me/hcibysumonta' color="danger">Click</Link></span>
         <br/>
-        <Button color="danger" className="mt-5">
-        <Link href="/login" color="foreground">BACK TO LOGIN</Link>
+        <Button color="danger" className="mt-5" onClick={() => signOut({ callbackUrl: '/login' })}>BACK TO LOGIN
       </Button> 
         </div>
       
