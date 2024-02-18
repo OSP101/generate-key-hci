@@ -256,7 +256,7 @@ export default function index() {
                                                         </div>
                                                         <div className="flex flex-col justify-content pt-5">
                                                             <Button
-                                                                href="https://youtu.be/_TtbrybuyyA"
+                                                                href="https://youtu.be/DhMHnSDfYo4"
                                                                 as={Link}
                                                                 color="success"
                                                                 showAnchorIcon
@@ -404,7 +404,7 @@ export default function index() {
                                                         </div>
                                                         <div className="flex flex-col justify-content pt-5">
                                                             <Button
-                                                                href="https://youtu.be/_TtbrybuyyA"
+                                                                href="https://youtu.be/DhMHnSDfYo4"
                                                                 as={Link}
                                                                 color="success"
                                                                 showAnchorIcon
@@ -416,7 +416,7 @@ export default function index() {
                                                             {groups.map((group, groupIndex) => (
                                                                 group.id === user.groupid ? (
                                                                     <Button
-                                                                        href={`https://hcibysumonta.com/hci66/login/index.php?username=${user.stdid}&password=${user.key}`}
+                                                                        href={`https://hcibysumonta.com/hci66/login/index.php?username=${group.username}&password=${group.key}`}
                                                                         as={Link}
                                                                         color="success"
                                                                         showAnchorIcon
