@@ -225,7 +225,7 @@ export default function index() {
                                                     </div>
                                                     <div>
 
-                                                        <h3 className={`text-xl text-center font-extrabold pb-1 ${theme == "light" ? "text-black" : ""}`}>กำหนดส่งวันจันทร์ ที่ 20 มีนาคม 2567 เวลา 13:00</h3>
+                                                        <h3 className={`text-xl text-center font-extrabold pb-1 ${theme == "light" ? "text-black" : ""}`}>กำหนดส่งวันจันทร์ ที่ 20 มีนาคม 2568 เวลา 13:00</h3>
                                                         <h3 className={`text-xl text-center font-extrabold pb-6 ${theme == "light" ? "text-black" : ""}`}>เหลือเวลาอีก</h3>
 
                                                         <div className="grid grid-flow-col justify-center gap-5 text-center auto-cols-max">
