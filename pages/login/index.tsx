@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useSession, signIn, signOut } from "next-auth/react"
 import React, { useState, Suspense } from 'react'
-import { Tabs, Tab, Card, CardBody, Spinner, Button, Image } from "@nextui-org/react";
+import { Tabs, Tab, Card, CardBody, Spinner, Button, Image } from "@heroui/react";
 import Head from 'next/head';
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'

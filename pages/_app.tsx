@@ -1,7 +1,7 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from "next-auth/react"
-import {NextUIProvider} from "@nextui-org/system";
+import {HeroUIProvider} from "@heroui/system";
 import {ThemeProvider as NextThemesProvider} from "next-themes";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -9,12 +9,12 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <NextUIProvider>
+      <HeroUIProvider>
       <NextThemesProvider attribute="class" defaultTheme="light">
       <Component {...pageProps}/>
 
       </NextThemesProvider>
-      </NextUIProvider>
+      </HeroUIProvider>
       <Analytics />
       <SpeedInsights />
     </SessionProvider>

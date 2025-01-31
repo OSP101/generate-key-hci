@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Snippet } from "@nextui-org/react";
-import { Tooltip, Tabs, Tab, Card, CardBody, CardHeader, CardFooter, Divider, Link, Image, Button, Switch } from "@nextui-org/react";
-import { Chip } from "@nextui-org/react";
+import { Snippet } from "@heroui/react";
+import { Tooltip, Tabs, Tab, Card, CardBody, CardHeader, CardFooter, Divider, Link, Image, Button, Switch, Avatar, Spinner } from "@heroui/react";
+import { Chip } from "@heroui/react";
 import CheckIcon from "./CheckIcon"
 import { signOut } from 'next-auth/react';
 import { useSession, signIn } from "next-auth/react"
@@ -9,6 +9,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router'
 import { useTheme } from 'next-themes'
 import { IoIosInformationCircle } from "react-icons/io";
+import { motion } from 'framer-motion';
 
 import { users, groups } from '../../data/data';
 
@@ -21,95 +22,52 @@ interface TimeLeft {
     seconds: number;
 }
 
+const CountdownItem = ({ value, label }: { value: number; label: string }) => (
+    <motion.div
+        className="flex flex-col items-center"
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.3 }}
+    >
+        <span className="font-mono text-xl md:text-5xl bg-gradient-to-br from-success-400 to-success-700 bg-clip-text text-transparent">
+            {value.toString().padStart(2, '0')}
+        </span>
+        <span className="text-sm text-default-500">{label}</span>
+    </motion.div>
+)
+
 export default function index() {
     const { data: session } = useSession()
     const { theme, setTheme } = useTheme()
-    const [isSelected, setSelected] = useState(false)
+    const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft('2025-03-24T13:00:00'))
+    const [timeLeftSinger, setTimeLeftSinger] = useState<TimeLeft>(calculateTimeLeft('2025-03-05T13:00:00'))
 
-
-    // console.log(theme)
-    const swit = () => {
-        if (isSelected) {
-
-            setSelected(false)
-            console.log("Dark")
-            setTheme('dark')
-        } else {
-
-            setSelected(true)
-            console.log("Light")
-            setTheme('light')
+    function calculateTimeLeft(targetDate: string): TimeLeft {
+        const difference = new Date(targetDate).getTime() - Date.now()
+        return {
+            days: Math.max(0, Math.floor(difference / (1000 * 60 * 60 * 24))),
+            hours: Math.max(0, Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))),
+            minutes: Math.max(0, Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))),
+            seconds: Math.max(0, Math.floor((difference % (1000 * 60)) / 1000))
         }
     }
 
-    const calculateTimeLeftSinger = (): TimeLeft => {
-        const thaiTimeZone = 'Asia/Bangkok';
-        const targetDate = new Date('2024-03-06T13:00:00'); // Set your countdown date here
-        const currentDate = new Date();
-        const formatter = new Intl.DateTimeFormat('en-US', { timeZone: thaiTimeZone });
-
-        const difference = targetDate.getTime() - currentDate.getTime(); // Set your countdown date here
-        let timeLeftSinger: TimeLeft = {
-            days: 0,
-            hours: 0,
-            minutes: 0,
-            seconds: 0,
-        };
-
-        if (difference > 0) {
-            timeLeftSinger = {
-                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-                hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-                minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-                seconds: Math.floor((difference % (1000 * 60)) / 1000),
-            };
-        }
-
-        return timeLeftSinger;
-    };
-
-    const [timeLeftSinger, setTimeLeftSinger] = useState<TimeLeft>(calculateTimeLeftSinger());
-
-    const calculateTimeLeft = (): TimeLeft => {
-        const thaiTimeZone = 'Asia/Bangkok';
-        const targetDate = new Date('2024-03-20T13:00:00'); // Set your countdown date here
-        const currentDate = new Date();
-        const formatter = new Intl.DateTimeFormat('en-US', { timeZone: thaiTimeZone });
-
-        const difference = targetDate.getTime() - currentDate.getTime(); // Set your countdown date here
-        let timeLeft: TimeLeft = {
-            days: 0,
-            hours: 0,
-            minutes: 0,
-            seconds: 0,
-        };
-
-        if (difference > 0) {
-            timeLeft = {
-                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-                hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-                minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-                seconds: Math.floor((difference % (1000 * 60)) / 1000),
-            };
-        }
-
-        return timeLeft;
-    };
-
-    const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
-
     useEffect(() => {
         const timer = setInterval(() => {
-            setTimeLeftSinger(calculateTimeLeftSinger());
-            setTimeLeft(calculateTimeLeft());
+            setTimeLeft(calculateTimeLeft('2025-03-24T13:00:00'))
+            setTimeLeftSinger(calculateTimeLeft('2025-03-05T13:00:00'))
+        }, 1000)
+        return () => clearInterval(timer)
+    }, [])
 
-        }, 1000);
+    const currentUser = users.find(user => user.email === session?.user?.email)
+    const currentGroup = groups.find(group => group.id === currentUser?.groupid)
 
-        return () => clearInterval(timer);
-    }, []);
-    const router = useRouter()
-
-
+    if (!currentUser) return (
+        <div className="min-h-screen flex items-center justify-center">
+            <Spinner size="lg" />
+        </div>
+    )
     return (
         <>
             <Head>
@@ -135,311 +93,187 @@ export default function index() {
                         </div>
                     </div>
 
-                    <Switch
-                        size="lg"
-                        onClick={swit}
-                        color="success"
-                        thumbIcon={({ className }) =>
-                            isSelected ? (
-                                <svg
-                                    className={className}
-                                    aria-hidden="true"
-                                    focusable="false"
-                                    height="1em"
-                                    role="presentation"
-                                    viewBox="0 0 24 24"
-                                    width="1em"
-                                >
-                                    <g fill="currentColor">
-                                        <path d="M19 12a7 7 0 11-7-7 7 7 0 017 7z" />
-                                        <path d="M12 22.96a.969.969 0 01-1-.96v-.08a1 1 0 012 0 1.038 1.038 0 01-1 1.04zm7.14-2.82a1.024 1.024 0 01-.71-.29l-.13-.13a1 1 0 011.41-1.41l.13.13a1 1 0 010 1.41.984.984 0 01-.7.29zm-14.28 0a1.024 1.024 0 01-.71-.29 1 1 0 010-1.41l.13-.13a1 1 0 011.41 1.41l-.13.13a1 1 0 01-.7.29zM22 13h-.08a1 1 0 010-2 1.038 1.038 0 011.04 1 .969.969 0 01-.96 1zM2.08 13H2a1 1 0 010-2 1.038 1.038 0 011.04 1 .969.969 0 01-.96 1zm16.93-7.01a1.024 1.024 0 01-.71-.29 1 1 0 010-1.41l.13-.13a1 1 0 011.41 1.41l-.13.13a.984.984 0 01-.7.29zm-14.02 0a1.024 1.024 0 01-.71-.29l-.13-.14a1 1 0 011.41-1.41l.13.13a1 1 0 010 1.41.97.97 0 01-.7.3zM12 3.04a.969.969 0 01-1-.96V2a1 1 0 012 0 1.038 1.038 0 01-1 1.04z" />
-                                    </g>
-                                </svg>
-                            ) : (
-                                <svg
-                                    className={className}
-                                    aria-hidden="true"
-                                    focusable="false"
-                                    height="1em"
-                                    role="presentation"
-                                    viewBox="0 0 24 24"
-                                    width="1em"
-                                >
-                                    <path
-                                        d="M21.53 15.93c-.16-.27-.61-.69-1.73-.49a8.46 8.46 0 01-1.88.13 8.409 8.409 0 01-5.91-2.82 8.068 8.068 0 01-1.44-8.66c.44-1.01.13-1.54-.09-1.76s-.77-.55-1.83-.11a10.318 10.318 0 00-6.32 10.21 10.475 10.475 0 007.04 8.99 10 10 0 002.89.55c.16.01.32.02.48.02a10.5 10.5 0 008.47-4.27c.67-.93.49-1.519.32-1.79z"
-                                        fill="currentColor"
-                                    />
-                                </svg>
-
-                            )
-                        }
-                    >
-                    </Switch>
-
-
                 </div>
 
-                <div className="min-h-screen flex flex-col items-center">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <Tabs
+                            aria-label="Project Tabs"
+                            color="success"
+                            variant="light"
+                            className="mb-2"
+                        >
+                            <Tab key="solo" title="งานเดี่ยว">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {/* Card ข้อมูลส่วนตัว */}
+                                    <Card className="w-full p-4 bg-gradient-to-br from-success-50 to-success-100">
+                                        <CardHeader className="flex gap-4">
+                                            <Avatar src={session?.user?.image || undefined} size="lg" />
+                                            <div>
+                                                <p className="text-lg font-semibold">{session?.user?.name}</p>
+                                                <p className="text-sm text-success-600">{currentUser?.stdid} | Section {currentUser?.sec}</p>
+                                            </div>
+                                        </CardHeader>
 
-                    <h3 className="text-xl text-center font-extrabold">HCI Mini project</h3>
+                                        <CardBody className="space-y-4">
+                                            <div>
+                                                <p className="text-sm text-default-500 mb-1">Username</p>
+                                                <Snippet symbol="" color="success" variant="flat" className='w-full'>{currentUser?.stdid}</Snippet>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-default-500 mb-1">Password</p>
+                                                <Snippet symbol="" color="success" variant="flat" className='w-full'>{currentUser?.key}</Snippet>
+                                            </div>
+                                        </CardBody>
+                                    </Card>
 
-                    <div className=" max-w-6xl w-full p-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md sm:m-0 md:m-0">
-                        <div className=" w-full sm:px-6 py-4">
-                            <div className="flex w-full flex-col">
-                                {users.map((user, userIndex) => (
-                                    user.email === session?.user?.email ? (
-                                        <Tabs key={userIndex} aria-label="Options" color='success' className=' text-white'>
-                                            <Tab key="photos" title="งานเดี่ยว" className=' text-white'>
-                                                <div className="grid md:grid-cols-2 items-center gap-4 w-full  ms:m-0">
-                                                    <div className="md:max-w-md w-full">
-                                                        <Card className="max-w-[400px]">
-                                                            <CardHeader className="flex gap-3">
-                                                                <Image
-                                                                    alt="nextui logo"
-                                                                    height={60}
-                                                                    radius="sm"
-                                                                    src={session?.user?.image || undefined}
-                                                                    width={60}
-                                                                />
-                                                                <div className="flex flex-col">
-                                                                    <p className="text-md">{session?.user?.name}</p>
-                                                                    <p className="text-small text-default-500">{session?.user?.email}</p>
-                                                                    <p className="text-small text-default-500">{user.stdid} Section: {user.sec}</p>
-                                                                </div>
-                                                            </CardHeader>
-                                                            <Divider />
-                                                            <CardBody>
-                                                                <p className='text-md'>Username และ Password สำหรับเข้าสู่ระบบ</p>
-                                                                <br />
-                                                                <p className='text-small text-default-500'>Username:</p>
-                                                                <Snippet size="sm" color="success" hideSymbol>{user.stdid}</Snippet>
-                                                                <p className='text-small text-default-500 pt-1'>Password:</p>
-                                                                <Snippet size="sm" color="success" hideSymbol>{user.key}</Snippet>
-                                                            </CardBody>
-                                                            <Divider />
-                                                            <CardFooter>
-                                                                <p className='text-small text-default-500'>update: 13/02/2024 09:48:19</p>
+                                    {/* Card นับเวลาถอยหลัง */}
+                                    <Card className="w-full p-6 bg-gradient-to-br from-default-50 to-default-100">
+                                        <h3 className="text-sm md:text-xl font-bold text-center mb-4">⏳ กำหนดส่ง 24 มีนาคม 2568 เวลา 13:00</h3>
 
-                                                            </CardFooter>
-                                                        </Card>
-                                                    </div>
-                                                    <div>
+                                        <div className="grid grid-flow-col gap-8 justify-center mb-6">
+                                            <CountdownItem value={timeLeft.days} label="วัน" />
+                                            <CountdownItem value={timeLeft.hours} label="ชั่วโมง" />
+                                            <CountdownItem value={timeLeft.minutes} label="นาที" />
+                                            <CountdownItem value={timeLeft.seconds} label="วินาที" />
+                                        </div>
 
-                                                        <h3 className={`text-xl text-center font-extrabold pb-1 ${theme == "light" ? "text-black" : ""}`}>กำหนดส่งวันจันทร์ ที่ 20 มีนาคม 2568 เวลา 13:00</h3>
-                                                        <h3 className={`text-xl text-center font-extrabold pb-6 ${theme == "light" ? "text-black" : ""}`}>เหลือเวลาอีก</h3>
+                                        <div className="flex flex-col gap-3">
+                                            <Button
+                                                as={Link}
+                                                href="https://youtu.be/DhMHnSDfYo4"
+                                                color="success"
+                                                variant="shadow"
+                                                target="_blank"
+                                                className="font-semibold"
+                                            >
+                                                📖 คู่มือการส่งเอกสารงานเดี่ยว
+                                            </Button>
+                                            <Button
+                                                as={Link}
+                                                href={`https://hci.osp101.dev/hci67/login/index.php?username=${currentUser?.stdid}&password=${currentUser?.key}`}
+                                                color="success"
+                                                variant="flat"
+                                                target="_blank"
+                                                className="font-semibold"
+                                            >
+                                                🌐 ไปยังหน้าส่งเอกสารงานเดี่ยว
+                                            </Button>
+                                        </div>
+                                    </Card>
+                                </div>
+                            </Tab>
 
-                                                        <div className="grid grid-flow-col justify-center gap-5 text-center auto-cols-max">
-                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
-                                                                <span className={`countdown font-mono text-5xl ${theme == "light" ? "text-black" : ""}`}>
-                                                                    <span style={{ "--value": timeLeft.days } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
-                                                                </span>
-                                                                days
-                                                            </div>
-                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
-                                                                <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeft.hours } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
-                                                                </span>
-                                                                hours
-                                                            </div>
-                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
-                                                                <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeft.minutes } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
-                                                                </span>
-                                                                min
-                                                            </div>
-                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
-                                                                <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeft.seconds } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
-                                                                </span>
-                                                                sec
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex flex-col justify-content pt-5">
-                                                            <Button
-                                                                href="https://youtu.be/DhMHnSDfYo4"
-                                                                as={Link}
-                                                                color="success"
-                                                                showAnchorIcon
-                                                                variant="flat"
-                                                                target='blank'
-                                                            >
-                                                                คู่มือสำหรับส่งเอกสารงานเดี่ยว
-                                                            </Button>
-                                                            <Button
-                                                                href={`https://hcibysumonta.com/hci66/login/index.php?username=${user.stdid}&password=${user.key}`}
-                                                                as={Link}
-                                                                color="success"
-                                                                showAnchorIcon
-                                                                variant="flat"
-                                                                className='mt-3'
-                                                                target='blank'
-                                                            >
-                                                                ลิงก์เว็บไซต์สำหรับส่งเอกสารงานเดี่ยว
-                                                            </Button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </Tab>
-                                            <Tab key="music" title="งานกลุ่ม">
-                                                <div className="grid md:grid-cols-2 items-center justify-start gap-4 w-full">
-                                                    <div className="md:max-w-md w-full">
+                            <Tab key="group" title="งานกลุ่ม">
+                                {currentGroup && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {/* Card ข้อมูลกลุ่ม */}
+                                        <Card className="w-full p-4 bg-gradient-to-br from-success-50 to-success-100">
+                                            <CardHeader className="flex flex-col items-start">
+                                                <h4 className="text-lg font-bold">กลุ่ม {currentGroup.id}</h4>
+                                                <p className="text-sm text-success-600">{currentGroup.name}</p>
+                                            </CardHeader>
 
-                                                        <Card className="max-w-[400px]">
-                                                            <CardHeader className="flex gap-3">
-                                                                <Image
-                                                                    alt="nextui logo"
-                                                                    height={60}
-                                                                    radius="sm"
-                                                                    src={session?.user?.image || undefined}
-                                                                    width={60}
-                                                                />
-                                                                <div className="flex flex-col">
-                                                                    <p className="text-md">{session?.user?.name}</p>
-                                                                    <p className="text-small text-default-500">{session?.user?.email}</p>
-                                                                    <p className="text-small text-default-500">{user.stdid} Section: {user.sec}</p>
-                                                                </div>
-                                                            </CardHeader>
-                                                            <Divider />
-
-                                                            {groups.map((group, groupIndex) => (
-                                                                group.id === user.groupid ? (<div key={groupIndex}>
-                                                                    <CardBody>
-                                                                        <Tooltip key={groupIndex} color='success' placement='right' content={
-                                                                            <div className="px-1 py-1">
-                                                                                <div className="text-small font-bold"><b>กลุ่มที่:</b> {group.id} {group.name}</div>
-                                                                                <div className="text-tiny"><b>หัวข้อ:</b> {group.topic}</div>
-                                                                                <div className="text-tiny"><b>กลุ่มเป้าหมาย:</b> {group.Target}</div>
-                                                                                <div className="text-tiny"><b>การทำงานของแอป:</b> </div>
-                                                                                {group.details.map((detail, detailIndex) => (
-                                                                                    <li key={detailIndex} className="text-tiny">{detail}</li>
-                                                                                ))}
-
-                                                                            </div>}>
-                                                                            <Button variant="flat" className="capitalize">กลุ่มที่: {group.id} {group.name}</Button>
-                                                                        </Tooltip>
-                                                                        {users.map((userall, userIndexAll) => (
-                                                                            userall.groupid === group.id ? (
-                                                                                <Tooltip key={userIndexAll} color='success' placement='right' content={
-                                                                                    <div className='flex py-1'>
-                                                                                        <Image
-                                                                                            alt="nextui logo"
-                                                                                            height={100}
-                                                                                            radius="sm"
-                                                                                            src={userall.image || undefined}
-                                                                                            width={60}
-                                                                                        />
-                                                                                        <div className="flex flex-col ms-1">
-                                                                                            <p className="text-small font-bold">{userall.name}</p>
-                                                                                            <p className="text-tiny">{userall.email}</p>
-                                                                                            <p className="text-tiny">{userall.stdid} Section: {userall.sec}</p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                }>
-                                                                                    <Chip
-                                                                                        key={userIndexAll}
-                                                                                        startContent={<CheckIcon size={18} height={undefined} width={undefined} />}
-                                                                                        variant="bordered"
-                                                                                        color="success"
-                                                                                        className='mt-1'
-                                                                                    >
-                                                                                        {userall.name}
-                                                                                    </Chip>
-                                                                                </Tooltip>
-                                                                            ) : null
-
-                                                                        ))}
-
-
-                                                                    </CardBody>
-                                                                    <Divider />
-                                                                    <CardBody>
-                                                                        <p className='text-md'>Username และ Password สำหรับเข้าสู่ระบบ</p>
-                                                                        <br />
-                                                                        <p className='text-small text-default-500'>Username:</p>
-                                                                        <Snippet size="sm" color="success" hideSymbol>{group.username}</Snippet>
-                                                                        <p className='text-small text-default-500 pt-1'>Password:</p>
-                                                                        <Snippet size="sm" color="success" hideSymbol>{group.key}</Snippet>
-                                                                    </CardBody>
-                                                                </div>) : null
-                                                            ))}
-
-                                                            <Divider />
-                                                            <CardFooter>
-                                                                <p className='text-small text-default-500'>update: 13/02/2024 18:48:19</p>
-
-                                                            </CardFooter>
-                                                        </Card>
-
-                                                    </div>
-                                                    <div>
-
-                                                        <h3 className={`text-xl text-center font-extrabold pb-1 ${theme == "light" ? "text-black" : ""}`}>กำหนดส่งวันจันทร์ ที่ 06 มีนาคม 2567 เวลา 13:00</h3>
-                                                        <h3 className={`text-xl text-center font-extrabold pb-6 ${theme == "light" ? "text-black" : ""}`}>เหลือเวลาอีก</h3>
-
-                                                        <div className="grid grid-flow-col justify-center gap-5 text-center auto-cols-max">
-                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
-                                                                <span className={`countdown font-mono text-5xl ${theme == "light" ? "text-black" : ""}`}>
-                                                                    <span style={{ "--value": timeLeftSinger.days } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
-                                                                </span>
-                                                                days
-                                                            </div>
-                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
-                                                                <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeftSinger.hours } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
-                                                                </span>
-                                                                hours
-                                                            </div>
-                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
-                                                                <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeftSinger.minutes } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
-                                                                </span>
-                                                                min
-                                                            </div>
-                                                            <div className={`flex flex-col ${theme == "light" ? "text-black" : ""}`}>
-                                                                <span className="countdown font-mono text-5xl">
-                                                                    <span style={{ "--value": timeLeftSinger.seconds } as React.CSSProperties} className={theme == "light" ? "text-black" : ""}></span>
-                                                                </span>
-                                                                sec
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex flex-col justify-content pt-5">
-                                                            <Button
-                                                                href="https://youtu.be/DhMHnSDfYo4"
-                                                                as={Link}
-                                                                color="success"
-                                                                showAnchorIcon
-                                                                variant="flat"
-                                                                target='blank'
-                                                            >
-                                                                คู่มือสำหรับส่งเอกสารงานกลุ่ม
-                                                            </Button>
-                                                            {groups.map((group, groupIndex) => (
-                                                                group.id === user.groupid ? (
-                                                                    <Button
-                                                                        href={`https://hcibysumonta.com/hci66/login/index.php?username=${group.username}&password=${group.key}`}
-                                                                        as={Link}
+                                            <CardBody className="space-y-4">
+                                                <div>
+                                                    <p className="text-sm text-default-500 mb-1">สมาชิกกลุ่ม</p>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {users
+                                                            .filter(user => user.groupid === currentGroup.id)
+                                                            .map((member) => (
+                                                                <Tooltip
+                                                                    key={member.stdid}
+                                                                    content={
+                                                                        <div className="p-2">
+                                                                            <p className="text-sm">{member.email}</p>
+                                                                            <p className="text-xs text-default-500">{member.stdid}</p>
+                                                                        </div>
+                                                                    }
+                                                                >
+                                                                    <Chip
+                                                                        variant="dot"
                                                                         color="success"
-                                                                        showAnchorIcon
-                                                                        variant="flat"
-                                                                        className='mt-3'
-                                                                        target='blank'
+                                                                        className="cursor-pointer"
                                                                     >
-                                                                        ลิงก์เว็บไซต์สำหรับส่งเอกสารงานกลุ่ม
-                                                                    </Button>
-                                                                ) : null))}
-                                                        </div>
+                                                                        {member.name}
+                                                                    </Chip>
+                                                                </Tooltip>
+                                                            ))}
                                                     </div>
                                                 </div>
-                                            </Tab>
-                                        </Tabs>
-                                    ) : null
-                                ))}
-                            </div>
-                        </div>
 
-                    </div>
-                    <p className='text-small text-default-500 mb-3 mt-1'>© 2024 HCI v0.4 All Rights Reserved. made with by <a href="http://github.com/OSP101" target="_blank">OSP101</a> and <a href="http://www.facebook.com/picha143" target="_blank" rel="noopener noreferrer">Aomsin</a></p>
+                                                <div>
+                                                <p className="text-sm text-default-500 mb-1">Username</p>
+                                                <Snippet symbol="" color="success" variant="flat" className='w-full'>{currentGroup?.username}</Snippet>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-default-500 mb-1">Password</p>
+                                                <Snippet symbol="" color="success" variant="flat" className='w-full'>{currentGroup?.key}</Snippet>
+                                            </div>
+                                            </CardBody>
+                                        </Card>
 
+                                        {/* Card นับเวลาถอยหลังงานกลุ่ม */}
+                                        <Card className="w-full p-6 bg-gradient-to-br from-default-50 to-default-100">
+                                            <h3 className="text-sm md:text-xl font-bold text-center mb-4">⏳ กำหนดส่ง 5 มีนาคม 2568 เวลา 13:00</h3>
+
+                                            <div className="grid grid-flow-col gap-8 justify-center mb-6">
+                                                <CountdownItem value={timeLeftSinger.days} label="วัน" />
+                                                <CountdownItem value={timeLeftSinger.hours} label="ชั่วโมง" />
+                                                <CountdownItem value={timeLeftSinger.minutes} label="นาที" />
+                                                <CountdownItem value={timeLeftSinger.seconds} label="วินาที" />
+                                            </div>
+
+                                            <div className="flex flex-col gap-3">
+                                                <Button
+                                                    as={Link}
+                                                    href="https://youtu.be/DhMHnSDfYo4"
+                                                    color="success"
+                                                    variant="shadow"
+                                                    target="_blank"
+                                                    className="font-semibold"
+                                                >
+                                                    📖 คู่มือการส่งเอกสารงานกลุ่ม
+                                                </Button>
+                                                <Button
+                                                    as={Link}
+                                                    href={`https://hci.osp101.dev/hci67/login/index.php?username=${currentGroup.username}&password=${currentGroup.key}`}
+                                                    color="success"
+                                                    variant="flat"
+                                                    target="_blank"
+                                                    className="font-semibold"
+                                                >
+                                                    🌐 ไปยังหน้าส่งเอกสารงานกลุ่ม
+                                                </Button>
+                                            </div>
+                                        </Card>
+                                    </div>
+                                )}
+                            </Tab>
+                        </Tabs>
+
+                        <footer className="mt-12 text-center text-sm text-default-500">
+                            <p className="flex items-center justify-center gap-2">
+                                © 2024 HCI v0.4
+                                <span className="w-1 h-1 bg-default-400 rounded-full" />
+                                All Rights Reserved
+                            </p>
+                            <p className="mt-2">
+                                Made with ❤️ by{' '}
+                                <Link href="http://github.com/OSP101" target="_blank" color="success">
+                                    OSP101
+                                </Link>{' '}
+                                &{' '}
+                                <Link href="http://www.facebook.com/picha143" target="_blank" color="success">
+                                    Aomsin
+                                </Link>
+                            </p>
+                        </footer>
+                    </motion.div>
                 </div>
             </div>
         </>

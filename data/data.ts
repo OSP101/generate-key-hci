@@ -1,4 +1,4 @@
-import { image } from "@nextui-org/react";
+import { image } from "@heroui/react";
 import React from "react";
 const users = [
     {

@@ -9,7 +9,7 @@ import {
   useDisclosure,
   Chip,
   Link,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import Image from 'next/image'
 
 export default function Custom404() {
