@@ -60,6 +60,17 @@ export default function index() {
         return () => clearInterval(timer)
     }, [])
 
+    const router = useRouter()
+
+    useEffect(() => {
+        if (session) {
+            router.push("/ftp");
+        } else {
+            // Redirect to the login page only if there's no session
+            router.push("/login");
+        }
+      }, [session, router]);
+
     const currentUser = users.find(user => user.email === session?.user?.email)
     const currentGroup = groups.find(group => group.id === currentUser?.groupid)
 
